@@ -8,15 +8,15 @@ importers:
 
   client:
     dependencies:
+      '@andro.dev/jsonflow-engine':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@monaco-editor/react':
         specifier: ^4.7.0
         version: 4.7.0(monaco-editor@0.55.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       cytoscape:
         specifier: ^3.33.1
         version: 3.33.1
-      jsonflow-engine:
-        specifier: workspace:*
-        version: link:../engine
       react:
         specifier: ^19.1.1
         version: 19.2.4
@@ -82,6 +82,9 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@andro.dev/jsonflow-engine@1.0.0':
+    resolution: {integrity: sha512-PAfzhslFQGsdU4HdMT4PTtrRi8coTK6yKh+s4280OHyXPyawjYOpPrS18FFNGYBZrKJHcuwfUCu1iqVPzBk6eQ==}
 
   '@babel/code-frame@7.29.0':
     resolution: {integrity: sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==}
@@ -1224,6 +1227,10 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@andro.dev/jsonflow-engine@1.0.0':
+    dependencies:
+      zod: 4.3.6
 
   '@babel/code-frame@7.29.0':
     dependencies:
