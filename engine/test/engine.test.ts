@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Engine } from "@engine";
+import { Engine } from "../src";
 
 describe("Engine", () => {
   it("parses a minimal graph and defaults type to flow", () => {

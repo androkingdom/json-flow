@@ -10,11 +10,6 @@
     "types": ["node"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "baseUrl": "src",
-    "paths": {
-      "@engine": ["index.ts"],
-      "@engine/*": ["*"]
-    },
 
     "sourceMap": true,
     "declaration": true,

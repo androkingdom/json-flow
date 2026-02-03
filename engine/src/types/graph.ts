@@ -9,7 +9,7 @@ import type {
   LayoutSchema,
   NodeKindSchema,
   NodeSchema,
-} from "@engine/schema/graph";
+} from "../schema/graph";
 
 export type GraphType = z.infer<typeof GraphTypeSchema>;
 export type NodeKind = z.infer<typeof NodeKindSchema>;

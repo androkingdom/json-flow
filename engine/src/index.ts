@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { EdgeSchema, GraphSchema, NodeSchema } from "@engine/schema/graph";
+import { EdgeSchema, GraphSchema, NodeSchema } from "./schema/graph";
 import type {
   CytoscapeGraph,
   Edge,
   FlowchartCytoscapeGraph,
   Graph,
   Node,
-} from "@engine/types/graph";
+} from "./types/graph";
 
 export type EngineResult =
   | { ok: true; graph: Graph; cytoscape: CytoscapeGraph }

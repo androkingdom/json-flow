@@ -13,8 +13,6 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@andro.dev/jsonflow-engine": ["../engine/src/index.ts"],
-      "@andro.dev/jsonflow-engine/*": ["../engine/src/*"]
     }
   },
   "include": ["src"]
