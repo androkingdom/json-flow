@@ -2,6 +2,8 @@
 
 Schema-aware engine + client for turning JSON into Cytoscape-ready diagrams.
 
+Live: https://json-flow-client.vercel.app/
+
 ## Packages
 
 - `engine/` — `@andro.dev/jsonflow-engine` (Zod validation + parser)
@@ -28,4 +30,3 @@ pnpm -C engine test
 pnpm -C client dev
 pnpm -C client build
 ```
-

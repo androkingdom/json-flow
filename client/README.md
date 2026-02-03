@@ -2,6 +2,8 @@
 
 Frontend playground for editing JSON and rendering Cytoscape graphs.
 
+Live: https://json-flow-client.vercel.app/
+
 ## Features
 
 - Monaco editor with schema hints
