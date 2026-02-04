@@ -3,25 +3,29 @@
 ## Current Focus
 
 - Flowchart-first rendering (engine + client).
+- Migrate client to Next.js 16 (App Router) in `jsonflow-web/`.
+- Add dark/light mode toggle and docs route.
 
 ## UI Layout
 
-- Editor and Visualizer are side-by-side on medium+ screens.
-- Sidebar removed; schema help is via tooltip in the editor header.
+- Next.js UI in progress with componentized layout.
+- Header, Workspace (Editor + Visual), Footer.
+- Docs route served under `/docs` (opens in new tab from header).
 
 ## TODO / Plan
 
-1. Map `link_type` values to Cytoscape edge styles.
-2. Add example JSON for each diagram type.
-3. Add parser rules per `GraphSchema.type` (`sequence`, `flow`, `graph`) beyond basic mapping.
-4. Add validation errors and UX messages in the editor layer.
+1. Complete Next.js client migration.
+2. Map `link_type` values to Cytoscape edge styles.
+3. Add example JSON for each diagram type.
+4. Add parser rules per `GraphSchema.type` (`sequence`, `flow`, `graph`) beyond basic mapping.
+5. Add validation errors and UX messages in the editor layer.
 
 ## Layer Status
 
-- Editor Layer: in progress (React + Monaco)
+- Editor Layer: in progress (Next.js + Monaco, componentized)
 - Logic Layer: partial (Zod schema + validation)
 - Parser Layer: partial (basic Cytoscape conversion)
-- Visualization Layer: in progress (Cytoscape client)
+- Visualization Layer: in progress (Cytoscape client, componentized)
 - Layout Layer: not started
 
 ## Testing

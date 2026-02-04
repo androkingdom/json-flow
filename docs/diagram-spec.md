@@ -55,6 +55,9 @@ const GraphSchema = z.object({
 - Monaco editor for JSON input
 - Cytoscape renders engine output
 - Tailwind-based layout and styling
+- Next.js client migration in progress
+  - Header + Workspace + Footer components
+  - `/docs` route for documentation
 
 ## Future (Planned)
 

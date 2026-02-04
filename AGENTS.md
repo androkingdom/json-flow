@@ -5,21 +5,25 @@ A **JSONFLOW** Schema-Aware Logic Visualization Engine.
 ## 1. Build Commands
 
 ### Engine Package (engine/)
-- `pnpm build` - Build engine with tsup (outputs CJS + ESM + DTS)
-- `pnpm dev` - Watch mode development build
-- `pnpm test` - Tests (not implemented yet)
+- `pnpm -C engine build` - Build engine with tsup (outputs CJS + ESM + DTS)
+- `pnpm -C engine dev` - Watch mode development build
+- `pnpm -C engine test` - Run Vitest
+
+### Client App (client/)
+- `pnpm -C jsonflow-web dev` - Run Next.js dev server
+- `pnpm -C jsonflow-web build` - Build Next.js app
 
 ### Project Structure Commands
 - Use `pnpm` as package manager (version 10.28.1)
-- Each subdirectory (engine/, client/, server/) has its own package.json
+- Workspace root includes `engine/` and `jsonflow-web/`
 - Engine builds to `dist/` with both CommonJS and ES modules
 
 ## 2. Code Style Guidelines
 
 ### TypeScript Configuration
-- **Target:** ES2020 with NodeNext module resolution
+- **Target:** ES2020
 - **Strict Mode:** Enabled with `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`
-- **Module Syntax:** `verbatimModuleSyntax: true` (use explicit extensions)
+- **Module Syntax:** ESNext modules with bundler resolution
 - **Imports:** Use `import type` for type-only imports
 
 ### Naming Conventions
@@ -61,7 +65,7 @@ import { defineConfig } from 'tsup';
 ### Development Tools
 - **Package Manager:** pnpm (required, version locked)
 - **TypeScript:** 5.9.3 with strict configuration
-- **Testing Framework:** To be implemented (likely vitest)
+- **Testing Framework:** Vitest
 
 ## 4. Data Flow Architecture
 
@@ -101,7 +105,8 @@ const GraphSchema = z.object({
 ## 6. Project Structure
 
 - `engine/`: Core processing engine with Zod validation
-- `client/`: Frontend React application (planned)
+- `jsonflow-web/`: Next.js app (App Router)
+- `client-old/`: Archived Vite client (ignored)
 - `server/`: Backend server (planned)
 - `docs/`: Project documentation and specifications
 - `AGENTS.md`: This file for agentic coding guidelines

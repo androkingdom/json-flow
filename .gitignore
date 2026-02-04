@@ -6,6 +6,9 @@ node_modules/
 dist/
 **/dist/
 
+# Archived client
+client-old/
+
 # Logs
 *.log
 npm-debug.log*
