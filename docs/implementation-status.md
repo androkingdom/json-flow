@@ -36,3 +36,7 @@
 ## Live
 
 - Client: https://json-flow-client.vercel.app/
+
+## Backlog
+
+- Add node `shape` support (schema + engine + client styles)

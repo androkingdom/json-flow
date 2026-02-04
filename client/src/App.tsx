@@ -187,6 +187,48 @@ export default function App() {
 
   const parsed = useMemo(() => parseInput(raw), [raw]);
 
+  const applyLayoutDirection = (
+    targetCy: Core,
+    direction: "LR" | "RL" | "TB" | "BT",
+  ) => {
+    const nodes = targetCy.nodes();
+    if (nodes.length === 0) {
+      return;
+    }
+
+    const positions = nodes.map((node) => node.position());
+    const xs = positions.map((pos) => pos.x);
+    const ys = positions.map((pos) => pos.y);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+    const width = Math.max(1, maxX - minX);
+    const height = Math.max(1, maxY - minY);
+
+    nodes.positions((node) => {
+      const { x, y } = node.position();
+      const nx = x - minX;
+      const ny = y - minY;
+
+      if (direction === "BT") {
+        return { x, y: minY + (height - ny) };
+      }
+
+      if (direction === "LR") {
+        return { x: minX + ny, y: minY + (width - nx) };
+      }
+
+      if (direction === "RL") {
+        return { x: minX + (height - ny), y: minY + nx };
+      }
+
+      return { x, y };
+    });
+
+    targetCy.fit(undefined, 24);
+  };
+
   const renderGraph = () => {
     if (!containerRef.current) {
       return;
@@ -214,6 +256,10 @@ export default function App() {
       },
     });
 
+    const direction = parsed.ok
+      ? parsed.graph.layout?.direction ?? "LR"
+      : "LR";
+    nextCy.ready(() => applyLayoutDirection(nextCy, direction));
     setCy(nextCy);
   };
 
@@ -237,8 +283,8 @@ export default function App() {
   }, [parsed.ok, raw]);
 
   return (
-    <div className="min-h-screen bg-white px-8 py-10 text-slate-900">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
+    <div className="min-h-screen bg-white px-4 py-10 text-slate-900">
+      <div className="flex w-full flex-col gap-8">
         <header className="flex flex-col gap-6 rounded-2xl border border-slate-200 bg-slate-50 p-8 shadow-sm lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-3">
             <div className="chip">JSONFLOW / editor + renderer</div>
@@ -250,11 +296,7 @@ export default function App() {
               This is a fast, no-backend editor playground.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs uppercase tracking-[0.2em] text-slate-500">
-              {parsed.ok ? "Schema OK" : "Schema Error"}
-            </div>
-          </div>
+          <div className="flex flex-wrap items-center gap-3" />
         </header>
 
         <div className="flex flex-col gap-6 md:flex-row">
@@ -265,27 +307,31 @@ export default function App() {
                   <h2 className="text-xl font-semibold">JSON Editor</h2>
                   <span className="chip">Monaco</span>
                 </div>
-                <div className="relative group">
-                  <button className="chip" type="button" aria-label="Schema quick view">
-                    (i)
-                  </button>
-                  <div className="pointer-events-none absolute right-0 top-10 z-10 w-64 rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-600 opacity-0 shadow-lg transition group-hover:opacity-100">
-                    <p className="mb-2 font-semibold text-slate-800">Schema Quick View</p>
-                    <p>
-                      <span className="font-mono">type</span>: graph | sequence | flow
-                    </p>
-                    <p>
-                      <span className="font-mono">layout.direction</span>: LR | RL | TB | BT
-                    </p>
-                    <p>
-                      <span className="font-mono">node.kind</span>: actor, lifeline, message, activity, state, class
-                    </p>
-                    <p>
-                      <span className="font-mono">edge.kind</span>: next, call, return, async, transition, inherit, association
-                    </p>
-                    <p>
-                      <span className="font-mono">edge.link_type</span>: solid, dash, dot, double, bold, arrow, open-arrow
-                    </p>
+                <div className="flex items-center gap-2">
+                  <a
+                    className="btn border border-amber-300 bg-amber-100 text-amber-900 hover:bg-amber-200"
+                    href="/docs"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Open docs"
+                  >
+                    Open Docs
+                  </a>
+                  <div className="relative group">
+                    <div
+                      className={`rounded-full px-3 py-1 text-xs uppercase tracking-[0.2em] ${
+                        parsed.ok
+                          ? "border border-emerald-200 bg-emerald-50 text-emerald-700"
+                          : "border border-rose-200 bg-rose-50 text-rose-700"
+                      }`}
+                    >
+                      {parsed.ok ? "Schema OK" : "Schema Error"}
+                    </div>
+                    {!parsed.ok ? (
+                      <div className="pointer-events-none absolute right-0 top-9 z-10 w-72 rounded-xl border border-rose-200 bg-white p-3 text-xs text-rose-700 opacity-0 shadow-lg transition group-hover:opacity-100">
+                        {String(error ?? "Validation failed.")}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>

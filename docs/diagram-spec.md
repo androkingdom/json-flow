@@ -55,3 +55,7 @@ const GraphSchema = z.object({
 - Monaco editor for JSON input
 - Cytoscape renders engine output
 - Tailwind-based layout and styling
+
+## Future (Planned)
+
+- Node `shape` support (ellipse, diamond, etc.) with schema + renderer mapping
