@@ -1,6 +1,6 @@
 # JSONFLOW
 
-A **JSONFLOW** Schema-Aware Logic Visualization Engine.
+JSONFLOW is a **schema-aware, renderer-agnostic diagram engine** that turns JSON into graph data. The engine validates, enriches, and outputs a stable graph format; a separate **adapter layer** translates that output into a renderer (e.g., Cytoscape) to reduce vendor lock‑in.
 
 ## 1. Build Commands
 
@@ -72,7 +72,8 @@ import { defineConfig } from 'tsup';
 1. **Input Layer:** JSON data enters the system
 2. **Validation Layer:** Zod schemas validate and transform data
 3. **Processing Layer:** Engine processes validated data according to graph type
-4. **Output Layer:** Cytoscape-compatible format for visualization
+4. **Adapter Layer:** Translates engine output to renderer-specific format
+5. **Output Layer:** Renderer consumes adapter output (Cytoscape today)
 
 ## 5. Schema Definitions
 
@@ -105,6 +106,7 @@ const GraphSchema = z.object({
 ## 6. Project Structure
 
 - `engine/`: Core processing engine with Zod validation
+- `engine/adapter/`: Renderer adapters (planned)
 - `jsonflow-web/`: Next.js app (App Router)
 - `client-old/`: Archived Vite client (ignored)
 - `server/`: Backend server (planned)

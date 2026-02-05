@@ -55,9 +55,15 @@ const GraphSchema = z.object({
 - Monaco editor for JSON input
 - Cytoscape renders engine output
 - Tailwind-based layout and styling
-- Next.js client migration in progress
-  - Header + Workspace + Footer components
+- Next.js client (App Router)
+  - Componentized layout: Header + Workspace + Footer
   - `/docs` route for documentation
+  - Theme toggle via CSS variables (`.dark` on `html`)
+
+## Rendering Adapter (Planned)
+
+- Introduce an adapter layer between engine output and Cytoscape.
+- Goal: isolate renderer changes without breaking schema/engine.
 
 ## Future (Planned)
 

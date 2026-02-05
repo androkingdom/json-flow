@@ -3,22 +3,25 @@
 ## Current Focus
 
 - Flowchart-first rendering (engine + client).
-- Migrate client to Next.js 16 (App Router) in `jsonflow-web/`.
-- Add dark/light mode toggle and docs route.
+- Next.js client (App Router) stabilization in `jsonflow-web/`.
+- Theme toggle + CSS-variable theming (light/dark).
+- Docs route in Next client.
+- Add Cytoscape adapter layer to isolate rendering dependency.
 
 ## UI Layout
 
-- Next.js UI in progress with componentized layout.
-- Header, Workspace (Editor + Visual), Footer.
-- Docs route served under `/docs` (opens in new tab from header).
+- Componentized layout: `Header`, `Workspace` (Editor + Visual), `Footer`.
+- Docs route served under `/docs` (opened in new tab from header).
 
 ## TODO / Plan
 
-1. Complete Next.js client migration.
-2. Map `link_type` values to Cytoscape edge styles.
-3. Add example JSON for each diagram type.
-4. Add parser rules per `GraphSchema.type` (`sequence`, `flow`, `graph`) beyond basic mapping.
-5. Add validation errors and UX messages in the editor layer.
+1. Finish Next.js client parity with old Vite UI (docs polish, layout tuning).
+2. Introduce a Cytoscape adapter (engine output → adapter → renderer).
+3. Map `link_type` values to Cytoscape edge styles (engine + client).
+4. Add example JSON for each diagram type in docs.
+5. Add parser rules per `GraphSchema.type` (`sequence`, `flow`, `graph`) beyond basic mapping.
+6. Add semantic validation reporting (cycle detection, unreachable nodes).
+7. Add validation errors and UX messages in the editor layer.
 
 ## Layer Status
 

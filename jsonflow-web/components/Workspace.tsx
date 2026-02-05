@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import cytoscape, { type Core } from "cytoscape";
 import { Engine } from "@andro.dev/jsonflow-engine";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -136,18 +136,49 @@ const applyLayoutDirection = (
 export default function Workspace() {
   const { theme } = useTheme();
   const [raw, setRaw] = useState(starterJson);
+  const [debouncedRaw, setDebouncedRaw] = useState(starterJson);
   const [error, setError] = useState<string | null>(null);
+  const [errorType, setErrorType] = useState<"json" | "schema" | null>(null);
+  const [parsed, setParsed] = useState<
+    | { ok: true; graph: unknown; cytoscape: { nodes: unknown[]; edges: unknown[] } }
+    | { ok: false; error: unknown }
+  >({ ok: false, error: null });
   const [cy, setCy] = useState<Core | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
 
-  const parsed = useMemo(() => {
-    try {
-      return engine.parse(JSON.parse(raw));
-    } catch (parseError) {
-      return { ok: false as const, error: parseError };
-    }
+  useEffect(() => {
+    const handle = setTimeout(() => setDebouncedRaw(raw), 250);
+    return () => clearTimeout(handle);
   }, [raw]);
+
+  useEffect(() => {
+    try {
+      const json = JSON.parse(debouncedRaw);
+      const result = engine.parse(json);
+      if (!result.ok) {
+        const issues = (result.error as { issues?: { path: (string | number)[]; message: string }[] }).issues;
+        if (issues && issues.length > 0) {
+          const first = issues[0];
+          const path = first.path.length > 0 ? first.path.join(".") : "root";
+          setErrorType("schema");
+          setError(`Schema error at ${path}: ${first.message}`);
+        } else {
+          setErrorType("schema");
+          setError("Schema validation failed.");
+        }
+      } else {
+        setErrorType(null);
+        setError(null);
+      }
+      setParsed(result);
+    } catch (parseError) {
+      const message = parseError instanceof Error ? parseError.message : "Invalid JSON";
+      setErrorType("json");
+      setError(`JSON parse error: ${message}`);
+      setParsed({ ok: false, error: parseError });
+    }
+  }, [debouncedRaw]);
 
   const status: SchemaStatus = parsed.ok ? "ok" : "error";
   const stats: GraphStats = parsed.ok
@@ -163,7 +194,13 @@ export default function Workspace() {
     }
 
     if (!parsed.ok) {
-      setError("Invalid JSON or schema validation failed.");
+      if (errorType === "json") {
+        setError(error ?? "JSON parse error.");
+      } else if (errorType === "schema") {
+        setError(error ?? "Schema validation failed.");
+      } else {
+        setError("Invalid JSON or schema validation failed.");
+      }
       return;
     }
 
@@ -209,7 +246,7 @@ export default function Workspace() {
     const handler = () => renderGraph();
     window.addEventListener("jsonflow:render", handler);
     return () => window.removeEventListener("jsonflow:render", handler);
-  }, [parsed.ok, raw]);
+  }, [parsed.ok, raw, error, errorType]);
 
   return (
     <main className="grid w-full gap-6 px-6 py-8 md:grid-cols-2">
