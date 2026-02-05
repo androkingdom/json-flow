@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="flex w-full items-center justify-between px-6 py-4 text-xs" style={{ color: 'var(--text-muted)' }}>
         <span>JSONFLOW</span>
         <a
-          className="hover:underline"
+          className="cursor-pointer hover:underline"
           style={{ color: 'var(--text-secondary)' }}
           href="https://www.npmjs.com/package/@andro.dev/jsonflow-engine"
           target="_blank"

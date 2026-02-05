@@ -4,18 +4,21 @@
 
 ```ts
 const NodeSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   label: z.string().optional(),
   type: z.string().optional(),
   kind: z
     .enum(["actor", "lifeline", "message", "activity", "state", "class"])
     .optional(),
+  shape: z
+    .enum(["ellipse", "rectangle", "round-rectangle", "diamond", "hexagon", "triangle"])
+    .optional(),
   properties: z.record(z.string(), z.unknown()).optional(),
 });
 
 const EdgeSchema = z.object({
-  from: z.string(),
-  to: z.string(),
+  from: z.string().min(1),
+  to: z.string().min(1),
   label: z.string().optional(),
   kind: z
     .enum(["next", "call", "return", "async", "transition", "inherit", "association"])
@@ -59,12 +62,11 @@ const GraphSchema = z.object({
   - Componentized layout: Header + Workspace + Footer
   - `/docs` route for documentation
   - Theme toggle via CSS variables (`.dark` on `html`)
+- UI shows semantic issues + cyclic status
+- Cyclic edges are rendered with loop styling
+- Renderer registry allows swapping renderers without changing engine output
 
-## Rendering Adapter (Planned)
+## Rendering Adapter (Implemented)
 
-- Introduce an adapter layer between engine output and Cytoscape.
+- Adapter layer translates engine output to Cytoscape elements.
 - Goal: isolate renderer changes without breaking schema/engine.
-
-## Future (Planned)
-
-- Node `shape` support (ellipse, diamond, etc.) with schema + renderer mapping

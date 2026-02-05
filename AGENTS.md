@@ -80,16 +80,17 @@ import { defineConfig } from 'tsup';
 ### Core Data Structures
 ```typescript
 const NodeSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   label: z.string().optional(),
   type: z.string().optional(),
   kind: z.enum(["actor", "lifeline", "message", "activity", "state", "class"]).optional(),
+  shape: z.enum(["ellipse", "rectangle", "round-rectangle", "diamond", "hexagon", "triangle"]).optional(),
   properties: z.record(z.string(), z.unknown()).optional(),
 });
 
 const EdgeSchema = z.object({
-  from: z.string(),
-  to: z.string(),
+  from: z.string().min(1),
+  to: z.string().min(1),
   label: z.string().optional(),
   kind: z.enum(["next", "call", "return", "async", "transition", "inherit", "association"]).optional(),
   link_type: z.enum(["solid", "dash", "dot", "double", "bold", "arrow", "open-arrow"]).optional(),

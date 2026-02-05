@@ -1,14 +1,14 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import type { Theme, ThemeContextType } from '@/types/theme';
+import type { Theme, ThemeContextType } from '@/features/shared/types/theme';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'jsonflow-theme';
 
 function getSystemTheme(): Theme {
-  if (typeof window === 'undefined') return 'light';
+  if (typeof window === 'undefined') return 'dark';
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
@@ -34,8 +34,8 @@ function applyTheme(theme: Theme): void {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('light');
-  const [systemTheme, setSystemTheme] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('dark');
+  const [systemTheme, setSystemTheme] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
   const setTheme = useCallback((newTheme: Theme) => {
@@ -56,18 +56,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     
-    // Get stored theme or system preference
+    // Get stored theme or fall back to dark default
     const storedTheme = getStoredTheme();
     const systemPref = getSystemTheme();
-    
+
     setSystemTheme(systemPref);
     
     if (storedTheme) {
       setThemeState(storedTheme);
       applyTheme(storedTheme);
     } else {
-      setThemeState(systemPref);
-      applyTheme(systemPref);
+      setThemeState('dark');
+      applyTheme('dark');
     }
   }, []);
 

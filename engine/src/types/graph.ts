@@ -8,11 +8,13 @@ import type {
   LayoutDirectionSchema,
   LayoutSchema,
   NodeKindSchema,
+  NodeShapeSchema,
   NodeSchema,
 } from "../schema/graph";
 
 export type GraphType = z.infer<typeof GraphTypeSchema>;
 export type NodeKind = z.infer<typeof NodeKindSchema>;
+export type NodeShape = z.infer<typeof NodeShapeSchema>;
 export type EdgeKind = z.infer<typeof EdgeKindSchema>;
 export type EdgeLinkType = z.infer<typeof EdgeLinkTypeSchema>;
 export type LayoutDirection = z.infer<typeof LayoutDirectionSchema>;
@@ -21,12 +23,18 @@ export type Node = z.infer<typeof NodeSchema>;
 export type Edge = z.infer<typeof EdgeSchema>;
 export type Graph = z.infer<typeof GraphSchema>;
 
+export type EngineGraph = {
+  nodes: Node[];
+  edges: Edge[];
+};
+
 export type CytoscapeNode = {
   data: {
     id: string;
     label?: string;
     type?: string;
     kind?: string;
+    shape?: string;
     properties?: Record<string, unknown>;
   };
 };

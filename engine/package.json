@@ -1,6 +1,6 @@
 {
   "name": "@andro.dev/jsonflow-engine",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "JSONFLOW engine (logic + parser) for schema-validated diagrams.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -22,6 +22,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "prepublishOnly": "pnpm run build",
+    "publish:public": "pnpm publish --access public",
     "test": "vitest",
     "test:run": "vitest run"
   },

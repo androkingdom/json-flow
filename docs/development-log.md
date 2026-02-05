@@ -12,3 +12,12 @@
 - 2026-02-04: Wired Next.js page layout to the componentized UI.
 - 2026-02-04: Added theme toggle (CSS variable based) and `/docs` route.
 - 2026-02-04: Planned Cytoscape adapter layer to isolate renderer dependency.
+- 2026-02-04: Added semantic validation in engine (cycle detection, unreachable nodes, missing node refs).
+- 2026-02-04: Implemented Cytoscape adapter and switched client to adapter output.
+- 2026-02-05: Added node shape support (schema + adapter + client styles).
+- 2026-02-05: Added semantic issue UI and cyclic badge in Next.js client.
+- 2026-02-05: Tightened schema to disallow empty node/edge ids and added UI guard rails for invalid edges.
+- 2026-02-05: Added renderer registry + Jotai state and separated parsing/render logic for SSR safety.
+- 2026-02-05: Added back-edge loop styling for cyclic visualization.
+- 2026-02-05: Added renderer registry for pluggable renderers.
+- 2026-02-05: Fixed render-on-demand to parse latest editor input (debounce-safe).

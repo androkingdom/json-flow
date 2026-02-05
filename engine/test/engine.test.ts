@@ -12,8 +12,10 @@ describe("Engine", () => {
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.graph.type).toBe("flow");
-      expect(result.cytoscape.nodes).toHaveLength(2);
-      expect(result.cytoscape.edges).toHaveLength(1);
+      expect(result.engineGraph.nodes).toHaveLength(2);
+      expect(result.engineGraph.edges).toHaveLength(1);
+      expect(result.meta.isCyclic).toBe(false);
+      expect(result.semantic).toHaveLength(0);
     }
   });
 });

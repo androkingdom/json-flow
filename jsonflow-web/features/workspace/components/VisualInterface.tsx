@@ -1,24 +1,34 @@
 "use client";
 
-import type { VisualInterfaceProps } from "@/types/ui";
+import type { VisualInterfaceProps } from "@/features/workspace/types/ui";
 
 export default function VisualInterface({
   onExport,
   canExport,
   stats,
+  isCyclic,
   containerRef,
 }: VisualInterfaceProps) {
   return (
-    <section className="rounded-2xl border bg-white p-5 shadow-sm" style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}>
+    <section className="flex h-full flex-col rounded-2xl border bg-white p-5 shadow-sm" style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <h2 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Graph Preview</h2>
           <span className="rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.3em]" style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}>
             Cytoscape
           </span>
+          {isCyclic ? (
+            <span
+              className="rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.3em]"
+              style={{ borderColor: 'var(--border)', color: 'var(--accent)' }}
+              title="Cycle detected in graph"
+            >
+              Cyclic
+            </span>
+          ) : null}
         </div>
         <button
-          className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white"
+          className="cursor-pointer rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white"
           style={{
             backgroundColor: 'var(--accent)',
             color: 'var(--bg-primary)',
@@ -35,7 +45,7 @@ export default function VisualInterface({
 
       <div
         ref={containerRef}
-        className="mt-4 h-130 rounded-xl border"
+        className="mt-4 min-h-[520px] flex-1 rounded-xl border"
         style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}
       />
 

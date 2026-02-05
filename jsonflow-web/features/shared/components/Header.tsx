@@ -1,4 +1,4 @@
-import ThemeToggle from "@/components/ThemeToggle";
+import ThemeToggle from "@/features/shared/components/ThemeToggle";
 
 export default function Header() {
   return (
@@ -9,8 +9,8 @@ export default function Header() {
         backgroundColor: "var(--bg-secondary)",
       }}
     >
-      <div className="flex w-full flex-col gap-4 px-6 py-6 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-2">
+      <div className="flex w-full flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-1.5">
           <p
             className="text-xs font-semibold uppercase tracking-[0.3em]"
             style={{ color: "var(--text-muted)" }}
@@ -18,7 +18,7 @@ export default function Header() {
             JSONFLOW / editor + renderer
           </p>
           <h1
-            className="text-3xl font-semibold tracking-tight"
+            className="text-2xl font-semibold tracking-tight"
             style={{ color: "var(--text-primary)" }}
           >
             Schema-Aware Diagram Playground
@@ -30,7 +30,7 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-3">
           <a
-            className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] transition hover:-translate-y-0.5"
+            className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] transition hover:-translate-y-0.5 cursor-pointer"
             style={{
               border: "1px solid var(--border)",
               backgroundColor: "var(--bg-tertiary)",

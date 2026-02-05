@@ -2,11 +2,9 @@
 
 ## Current Focus
 
-- Flowchart-first rendering (engine + client).
-- Next.js client (App Router) stabilization in `jsonflow-web/`.
-- Theme toggle + CSS-variable theming (light/dark).
-- Docs route in Next client.
-- Add Cytoscape adapter layer to isolate rendering dependency.
+- UI polish (badges, schema/semantic messaging, layout tweaks).
+- Docs refresh for shapes + semantic output.
+- Renderer registry integration and additional renderer support.
 
 ## UI Layout
 
@@ -16,20 +14,23 @@
 ## TODO / Plan
 
 1. Finish Next.js client parity with old Vite UI (docs polish, layout tuning).
-2. Introduce a Cytoscape adapter (engine output → adapter → renderer).
-3. Map `link_type` values to Cytoscape edge styles (engine + client).
-4. Add example JSON for each diagram type in docs.
+2. Cytoscape adapter layer (engine output → adapter → renderer). (Done)
+3. Map `link_type` values to Cytoscape edge styles (engine + client). (Done)
+4. Add example JSON for each diagram type in docs. (In progress)
 5. Add parser rules per `GraphSchema.type` (`sequence`, `flow`, `graph`) beyond basic mapping.
-6. Add semantic validation reporting (cycle detection, unreachable nodes).
-7. Add validation errors and UX messages in the editor layer.
+6. Add semantic validation reporting (cycle detection, unreachable nodes). (Done)
+7. Add validation errors and UX messages in the editor layer. (Done)
+8. Add node `shape` support (schema + engine + client styles). (Done)
+9. Split UI parsing/validation and rendering responsibilities for SSR safety. (Done)
+10. Improve cycle visualization (back-edge loop styling). (Done)
 
 ## Layer Status
 
 - Editor Layer: in progress (Next.js + Monaco, componentized)
-- Logic Layer: partial (Zod schema + validation)
-- Parser Layer: partial (basic Cytoscape conversion)
-- Visualization Layer: in progress (Cytoscape client, componentized)
-- Layout Layer: not started
+- Logic Layer: solid (Zod + semantic validation)
+- Parser Layer: solid (adapter conversion)
+- Visualization Layer: solid (Cytoscape client + semantic UI + loop styling)
+- Layout Layer: basic (breadthfirst + direction transform)
 
 ## Testing
 
@@ -46,4 +47,5 @@
 
 ## Backlog
 
-- Add node `shape` support (schema + engine + client styles)
+- Add example JSON for each diagram type in docs
+- Advanced cycle layout (SCC collapse/expand)
