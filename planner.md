@@ -134,6 +134,8 @@ Status: **Done** (schema + adapter + client wired).
 - Docs reflect latest behavior
 
 Status: **Done** (UI: semantic issues + cyclic badge + cycle visualization; logic segregation complete).
+- Landing page refactored with video demo, feature grid, and react-icons
+- Component architecture moved to `features/landing/`
 
 ---
 
