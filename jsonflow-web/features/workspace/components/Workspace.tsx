@@ -128,7 +128,7 @@ export default function Workspace() {
   }, [parsed.ok, raw, error, errorType]);
 
   return (
-    <main className="grid w-full flex-1 items-stretch gap-6 px-6 py-6 md:grid-cols-2">
+    <main className="grid w-full flex-1 items-stretch gap-4 px-3 py-3 md:grid-cols-2 md:px-4 md:py-4">
       <a ref={downloadRef} className="hidden" />
       <EditorInterface
         value={raw}
